@@ -4,6 +4,7 @@ import {React} from 'react'
 import './App.css'
 import {Typography,AppBar,Toolbar} from '@mui/material'
 import Header from './Header'
+import Footer from './Footer'
 
 function App() {
 
@@ -12,6 +13,16 @@ function App() {
     <>
       <Header />
       <Typography variant='h1'>Hello</Typography>
+      <Typography variant='h1'>Hello</Typography>
+      <Typography variant='h1'>Hello</Typography>
+      <Typography variant='h1'>Hello</Typography>
+      <Typography variant='h1'>Hello</Typography>
+      <Typography variant='h1'>Hello</Typography>
+      <Typography variant='h1'>Hello</Typography>
+      <Typography variant='h1'>Hello</Typography>
+      <Typography variant='h1'>Hello</Typography>
+
+      <Footer />
     </>
   )
 }
