@@ -2,17 +2,30 @@ import {React} from 'react'
 // import reactLogo from './assets/react.svg'
 // import viteLogo from '/vite.svg'
 import './App.css'
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import {Typography,AppBar,Toolbar} from '@mui/material'
-import Header from './Header'
-import Footer from './Footer'
+import Chatbot from './pages/Chatbot/Chatbot';
+import Home from './pages/home';
 
 function App() {
 
 
   return (
     <>
-      <Header />
-      <Typography variant='h1'>Hello</Typography>
+      <Router>
+      {/* <Header /> */}
+        <Routes>
+          <Route path='/' exact  Component={Home}/>
+          <Route path='/home' exact  Component={Home}/>
+
+          <Route path='/chatbot' exact  Component={Chatbot}/>
+          {/* <Route path='/dashboard' exact  Component={Dashboard}/>
+          <Route path='/login' exact  Component={Login}/> */}
+        </Routes>
+        {/* <Footer /> */}
+
+      </Router>
+      {/* <Typography variant='h1'>Hello</Typography>
       <Typography variant='h1'>Hello</Typography>
       <Typography variant='h1'>Hello</Typography>
       <Typography variant='h1'>Hello</Typography>
@@ -22,7 +35,7 @@ function App() {
       <Typography variant='h1'>Hello</Typography>
       <Typography variant='h1'>Hello</Typography>
 
-      <Footer />
+      <Footer /> */}
     </>
   )
 }
