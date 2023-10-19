@@ -6,7 +6,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import {Typography,AppBar,Toolbar} from '@mui/material'
 import Chatbot from './pages/Chatbot/Chatbot';
 import Home from './pages/home';
-
+import AdminUpload from './pages/admin upload/ui';
 function App() {
 
 
@@ -19,6 +19,8 @@ function App() {
           <Route path='/home' exact  Component={Home}/>
 
           <Route path='/chatbot' exact  Component={Chatbot}/>
+          <Route path='/Admin' exact  Component={AdminUpload}/>
+
           {/* <Route path='/dashboard' exact  Component={Dashboard}/>
           <Route path='/login' exact  Component={Login}/> */}
         </Routes>

@@ -1,35 +1,95 @@
 import React from 'react'
 import { useEffect,useState } from 'react'
 import "./Chatbot.css"
-import send from "D:/React/sih/src/assets/send.svg"
+import send from "../../assets/send.svg"
+import { Link } from 'react-router-dom'
 
 
 const Chatbot = () => {
-  const a = [
-    {
-      "question": "What is this",
-      "answer" : "This this the answer"
+  const [query, setQuery] = useState('Hi');
+  const [data,setdata] = useState([{
+    "question": "What is this",
+    "answer" : "This this the answer"
+  }])
+  function changeValue(e){
+    setQuery(e.target.value)
+  }
+  
+  async function sendData(){
+    const todo =  query
+    const response = await fetch("http://127.0.0.1:5000/add_todo", {
+    method: "POST",
+    headers: {
+    'Content-Type' : 'application/json'
     },
-    {
-      "question": "what is the second question",
-      "answer": "Ths is the second answer"
-    },
-    {
-      "question": "what is the second question",
-      "answer": "Ths is the second answer"
-    },
-    {
-      "question": "what is the second question",
-      "answer": "Ths is the second answer"
-    },
-    {
-      "question": "what is the second question",
-      "answer": "Ths is the second answer"
+    body: JSON.stringify(todo)
+    })
+    if (response.ok){
+      
+     response.json().then((response)=> {
+      //  console.log(data)
+       const p = [...data];
+      //  console.log(...data,'aa')
+      p.push({
+        "question": query,
+        "answer" : response.message
+      })
+      // console.log(p,"ppppppp")
+      setdata(p)
+    })
+    // onNewTodo(todo)
+    // setContent('')
+    setQuery('')
+    // fetchData()
     }
-  ]
-  console.log(a.map(()=>{
+  }
 
-  }))
+  // useEffect(()=>{
+  //   sendData()
+  // },[data])
+
+  // function fetchData(){
+  //     fetch("http://127.0.0.1:5000/add_todo").then((res) =>{
+  //         console.log(res)
+  //         res.json().then((data) => {
+  //           console.log(data)
+  //             // Setting a data from api
+  //             // setdata({
+  //             //     name: data.Name,
+  //             //     age: data.Age,
+  //             //     date: data.Date,
+  //             //     programming: data.programming,
+  //             // });
+  //         })
+  //       }
+  //     );
+  // }
+  
+  // const a = [
+  //   {
+  //     "question": "What is this",
+  //     "answer" : "This this the answer"
+  //   },
+  //   {
+  //     "question": "what is the second question",
+  //     "answer": "Ths is the second answer"
+  //   },
+  //   {
+  //     "question": "what is the second question",
+  //     "answer": "Ths is the second answer"
+  //   },
+  //   {
+  //     "question": "what is the second question",
+  //     "answer": "Ths is the second answer"
+  //   },
+  //   {
+  //     "question": "what is the second question",
+  //     "answer": "Ths is the second answer"
+  //   }
+  // ]
+  // console.log(a.map(()=>{
+
+  // }))
   // const [answer,S]
   return (
     <div className='App'>
@@ -53,14 +113,15 @@ const Chatbot = () => {
           <div className="listItems">
             <img src="" alt="" className="listItemsImg" />Dashboard
           </div>
-          <div className="listItems">
+          <Link to="/Admin"><div className="listItems">
             <img src="" alt="" className="listItemsImg" />Admin
-          </div>
+          </div></Link>
         </div>
       </div>
       <div className="main">
         <div className="chats">
-          {a.map((e)=>{
+          
+          {data.map((e)=>{
            return (<>
            <div className="chat">
            <img src={send} alt="" className="chatImg" /><p className="txt-data">{e.question}</p>
@@ -74,7 +135,7 @@ const Chatbot = () => {
         </div>
         <div className="chatFooter">
           <div className="inp">
-            <input type="text" placeholder='Send a message'/><button className="send"><img src={send} alt="" /></button>
+            <input type="text" placeholder='Send a message' value={query} onChange={changeValue}/><button className="send"><img src={send} onClick={sendData} alt="" /></button>
           </div>
           <p>POWERGPT is a best tool</p>
         </div>
@@ -82,5 +143,6 @@ const Chatbot = () => {
     </div>
   )
 }
+
 
 export default Chatbot
